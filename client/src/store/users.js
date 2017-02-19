@@ -2,14 +2,20 @@ import api from '@api'
 import {
   userEndpoints, exerciseEndpoints
 } from '@resources/endpoints'
+import {
+  newUser
+} from './models/users'
+import {
+  newExercise
+} from './models/exercises'
 
 const defaultState = {
   meta: {},
-  userList: [],
-  newUser: {},
-  editUser: {},
-  detailUser: {},
-  createdExercises: [],
+  userList: [newUser()],
+  newUser: newUser(),
+  editUser: newUser(),
+  detailUser: newUser(),
+  createdExercises: [newExercise()],
   errors: []
 }
 

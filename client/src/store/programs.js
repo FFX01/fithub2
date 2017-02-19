@@ -2,18 +2,27 @@ import api from '@api'
 import {
   programEndpoints, userEndpoints, exerciseEndpoints
 } from '@resources/endpoints'
+import {
+  newProgram
+} from './models/programs'
+import {
+  newUser
+} from './models/users'
+import {
+  newExercise
+} from './models/exercises'
 
 const defaultState = {
   meta: {},
-  list: [],
-  detail: {},
+  list: [newProgram()],
+  detail: newProgram(),
   detailExerciseMeta: {},
-  detailExerciseList: [],
-  edit: {},
-  new: {},
+  detailExerciseList: [newExercise()],
+  edit: newProgram(),
+  new: newProgram(),
   errors: [],
   messages: [],
-  creator: {}
+  creator: newUser()
 }
 
 const mutations = {
@@ -54,8 +63,8 @@ const mutations = {
   clearMessages(state) {
     state.messages = []
   },
-  receiveCreator(state, obj) {
-    state.creator = obj
+  receiveCreator(state, payload) {
+    state.creator = payload.user
   }
 }
 
@@ -81,6 +90,14 @@ const actions = {
     api.get(exerciseEndpoints.list, {params: {programs: id}}).then(resp => {
       commit('receiveDetailExerciseMeta', resp.data)
       commit('receiveDetailExerciseList', resp.data.results)
+    }).catch(err => {
+      console.log(err)
+      commit('receiveError', err.message)
+    })
+  },
+  getCreator({commit}, uri) {
+    api.get(uri).then(resp => {
+      commit('receiveCreator', {user: resp.data})
     }).catch(err => {
       console.log(err)
       commit('receiveError', err.message)

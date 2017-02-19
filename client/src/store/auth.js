@@ -1,9 +1,12 @@
 import api, {getAuthToken} from '@api'
 import {userEndpoints} from '@resources/endpoints'
+import {
+  newAuthUser
+} from './models/auth'
 
 const defaultState = {
   token: '',
-  authUser: {},
+  authUser: newAuthUser(),
   loggedIn: false,
   errors: [],
   messages: []

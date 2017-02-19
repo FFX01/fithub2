@@ -2,7 +2,10 @@
   <div>
     <section class="section">
       <div class="container">
-        <program-detail-info :program="program"></program-detail-info>
+        <program-detail-info
+          :program="program"
+          :creator="creator"
+        ></program-detail-info>
       </div>
     </section>
   </div>
@@ -25,6 +28,9 @@ export default {
     },
     exercises() {
       return this.$store.getters['programs/detailExerciseList']
+    },
+    creator() {
+      return this.$store.getters['programs/creator']
     }
   },
   methods: {
@@ -33,6 +39,9 @@ export default {
     },
     getExerciseList() {
       this.$store.dispatch('programs/getDetailExerciseList', this.$route.params.id)
+    },
+    getCreator() {
+      this.$store.dispatch('programs/getCreator', this.program.creator)
     }
   },
   mounted() {
