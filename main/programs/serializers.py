@@ -10,5 +10,6 @@ class ProgramSerializer(HyperlinkedModelSerializer):
         model = Program
         fields = (
             'id', 'name', 'creator', 'exercises',
-            'permissions', 'description'
+            'permissions', 'description', 'created',
+            'updated'
         )

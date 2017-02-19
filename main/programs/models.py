@@ -18,6 +18,12 @@ class Program(models.Model):
         related_name='programs'
     )
     description = models.TextField()
+    created = models.DateTimeField(
+        auto_now_add=True
+    )
+    updated = models.DateTimeField(
+        auto_now=True
+    )
 
     @staticmethod
     def has_read_permission(request):

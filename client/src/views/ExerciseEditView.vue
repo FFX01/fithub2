@@ -12,7 +12,7 @@
         <div class="columns">
           <div class="column"></div>
           <div class="column is-three-quarters">
-            <exercise-edit-form :exercise="exercise"
+            <exercise-edit-form :exercise="exercise" v-if="exercise.id"
               v-on:submit="handleFormSubmit"
               v-on:cancel="handleCancel"
             ></exercise-edit-form>
@@ -33,16 +33,13 @@ export default {
     ExerciseEditForm
   },
   computed: {
-    exerciseId() {
-      return this.$route.params.id
-    },
     exercise() {
       return this.$store.getters['exercises/editExercise']
     }
   },
   methods: {
     getExercise() {
-      this.$store.dispatch('exercises/getEdit', this.exerciseId)
+      this.$store.dispatch('exercises/getEdit', this.$route.params.id)
     },
     handleFormSubmit(data) {
       this.$store.dispatch('exercises/update', data).then(() => {

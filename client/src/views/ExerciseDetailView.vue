@@ -1,6 +1,6 @@
 <template>
   <div>
-    <exercise-detail-info v-if="exercise && creator"
+    <exercise-detail-info v-if="exercise.id && creator.id"
       :exercise="exercise"
       :creator="creator"
     ></exercise-detail-info>

@@ -1,9 +1,21 @@
 <template>
+  <div>
+    <section class="section">
+      <div class="container">
+        <program-detail-info :program="program"></program-detail-info>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
+import ProgramDetailInfo from '@components/programs/ProgramDetailInfo.vue'
+
 export default {
   name: 'program-detail-view',
+  components: {
+    ProgramDetailInfo
+  },
   computed: {
     program() {
       return this.$store.getters['programs/detail']

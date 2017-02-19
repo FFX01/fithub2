@@ -5,21 +5,21 @@
       <input class="input"
         type="text"
         placeholder="Exercise name..."
-        v-model="exerciseData.name"
+        v-model="editExercise.name"
       />
     </p>
     <label class="label">Description</label>
     <p class="control">
       <textarea class="textarea"
         placeholder="Describe the exercise..."
-        v-model="exerciseData.description"
+        v-model="editExercise.description"
       ></textarea>
     </p>
     <label class="label">Instructions</label>
     <p class="control">
       <textarea class="textarea"
         placeholder="How to do the exercise..."
-        v-model="exerciseData.instructions"
+        v-model="editExercise.instructions"
       ></textarea>
     </p>
     <div class="control is-grouped">
@@ -43,16 +43,27 @@ export default {
   props: ['exercise'],
   data() {
     return {
-      exerciseData: Object.assign({}, this.exercise || {})
+      editExercise: {}
     }
   },
   methods: {
     submit() {
-      this.$emit('submit', this.exerciseData)
+      this.$emit('submit', this.editExercise)
     },
     cancel() {
       this.$emit('cancel')
+    },
+    updateState() {
+      this.editExercise = Object.assign({}, this.editExercise, this.exercise)
     }
+  },
+  watch: {
+    exercise(newData) {
+      this.updateState()
+    }
+  },
+  mounted() {
+    this.updateState()
   }
 }
 </script>
