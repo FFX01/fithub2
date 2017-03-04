@@ -12,6 +12,7 @@ import ExerciseCreateView from '@views/ExerciseCreateView.vue'
 import ExerciseEditView from '@views/ExerciseEditView.vue'
 import ProgramListView from '@views/ProgramListView.vue'
 import ProgramDetailView from '@views/ProgramDetailView.vue'
+import ProgramAdminView from '@views/ProgramAdminView.vue'
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,8 @@ const routes = [
   {name: 'exercise-create', path: '/exercises/create', component: ExerciseCreateView},
   {name: 'exercise-edit', path: '/exercises/:id/edit', component: ExerciseEditView},
   {name: 'program-list', path: '/programs', component: ProgramListView},
-  {name: 'program-detail', path: '/programs/:id', component: ProgramDetailView}
+  {name: 'program-detail', path: '/programs/:id', component: ProgramDetailView},
+  {name: 'program-admin', path: '/programs/:id/admin', component: ProgramAdminView}
 ]
 
 const router = new VueRouter({

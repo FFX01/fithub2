@@ -11,5 +11,5 @@ class ProgramSerializer(HyperlinkedModelSerializer):
         fields = (
             'id', 'name', 'creator', 'exercises',
             'permissions', 'description', 'created',
-            'updated'
+            'updated', 'routines'
         )

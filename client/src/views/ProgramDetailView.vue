@@ -7,17 +7,20 @@
           :creator="creator"
         ></program-detail-info>
       </div>
+      <program-detail-exercise-list :exercises="exercises"></program-detail-exercise-list>
     </section>
   </div>
 </template>
 
 <script>
 import ProgramDetailInfo from '@components/programs/ProgramDetailInfo.vue'
+import ProgramDetailExerciseList from '@components/programs/ProgramDetailExerciseList.vue'
 
 export default {
   name: 'program-detail-view',
   components: {
-    ProgramDetailInfo
+    ProgramDetailInfo,
+    ProgramDetailExerciseList
   },
   computed: {
     program() {
@@ -47,6 +50,11 @@ export default {
   mounted() {
     this.getProgramDetail()
     this.getExerciseList()
+  },
+  updated() {
+    if(this.creator.id === 0) {
+      this.getCreator()
+    }
   }
 }
 </script>

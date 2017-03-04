@@ -10,6 +10,7 @@
         <div class="column">
           <h2 class="title">{{user.username}}</h2>
           <h5 class="subtitle">Member since: {{dateJoined}}</h5>
+          <hr></hr>
           <div class="content" v-if="bio" v-html="bio"></div>
         </div>
       </div>

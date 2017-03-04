@@ -5,15 +5,30 @@
         <img src="http://placehold.it/128x128" />
       </figure>
     </div>
-
     <div class="column">
       <h2 class="title">{{program.name}}</h2>
       <span>Created: {{created}} | Updated: {{updated}}</span>
       <br />
       <span>Created by:
+        <router-link :to="{name: 'user-detail', params: {id: creator.id}}">
+          {{creator.username}}
+        </router-link>
       </span>
       <hr></hr>
       <div class="content" v-html="description"></div>
+      <nav class="level">
+        <div class="level-left">
+          <router-link class="level-item is-inline-mobile"
+            v-if="program.permissions.write"
+            :to="{name: 'program-admin', params: {id: program.id}}"
+            title="Edit this program"
+          >
+            <span class="icon is-small">
+              <i class="fa fa-pencil"></i>
+            </span>
+          </router-link>
+        </div>
+      </nav>
     </div>
   </div>
 </template>

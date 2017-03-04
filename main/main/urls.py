@@ -22,6 +22,7 @@ from djoser import views as djoser_views
 from users.views import UserViewSet
 from exercises.views import ExerciseViewSet
 from programs.views import ProgramViewSet
+from routines.views import RoutineViewSet, SetGroupViewSet, SetViewSet
 
 
 router = DefaultRouter()
@@ -29,6 +30,9 @@ router = DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'exercises', ExerciseViewSet)
 router.register(r'programs', ProgramViewSet)
+router.register(r'routines', RoutineViewSet)
+router.register(r'set_groups', SetGroupViewSet)
+router.register(r'sets', SetViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

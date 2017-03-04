@@ -3,3 +3,5 @@ include
 /lib
 .idea
 *.sqlite3
+*.whl
+pip-selfcheck.json

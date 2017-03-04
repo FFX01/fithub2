@@ -13,5 +13,5 @@ class UserSerializer(HyperlinkedModelSerializer):
         model = User
         fields = (
             'id', 'username', 'bio', 'permissions',
-            'date_joined', 'created_exercises'
+            'date_joined', 'created_exercises', 'created_routines'
         )

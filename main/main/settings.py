@@ -48,7 +48,8 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'exercises.apps.ExercisesConfig',
-    'programs.apps.ProgramsConfig'
+    'programs.apps.ProgramsConfig',
+    'routines.apps.RoutinesConfig'
 ]
 
 MIDDLEWARE = [
