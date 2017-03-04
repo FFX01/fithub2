@@ -3,13 +3,13 @@ const Program = {
   id: 0,
   name: '',
   creator: '',
-  exercises: [],
   permissions: {
     read: false,
     write: false
   },
   description: '',
   created: '',
-  updated: ''
+  updated: '',
+  routines: []
 }
 export const newProgram = () => Object.assign({}, Program)

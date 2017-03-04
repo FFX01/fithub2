@@ -13,10 +13,6 @@ class Program(models.Model):
         null=False,
         related_name='created_programs'
     )
-    exercises = models.ManyToManyField(
-        to='exercises.Exercise',
-        related_name='programs'
-    )
     description = models.TextField()
     created = models.DateTimeField(
         auto_now_add=True

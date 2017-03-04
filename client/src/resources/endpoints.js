@@ -22,3 +22,10 @@ export const programEndpoints = {
     return `/programs/${id}/`
   }
 }
+
+export const routineEndpoints = {
+  list: '/routines/',
+  detail(id) {
+    return `/routines/${id}/`
+  }
+}

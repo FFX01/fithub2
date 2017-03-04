@@ -9,7 +9,7 @@ class ProgramSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Program
         fields = (
-            'id', 'name', 'creator', 'exercises',
+            'id', 'name', 'creator', 'routines',
             'permissions', 'description', 'created',
-            'updated', 'routines'
+            'updated'
         )

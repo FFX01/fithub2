@@ -1,6 +1,7 @@
 import api from '@api'
 import {
-  programEndpoints, userEndpoints, exerciseEndpoints
+  programEndpoints, userEndpoints, exerciseEndpoints,
+  routineEndpoints
 } from '@resources/endpoints'
 import {
   newProgram
@@ -11,18 +12,21 @@ import {
 import {
   newExercise
 } from './models/exercises'
+import {
+  newRoutine
+} from './models/routines'
 
 const defaultState = {
   meta: {},
   list: [newProgram()],
   detail: newProgram(),
-  detailExerciseMeta: {},
-  detailExerciseList: [newExercise()],
   edit: newProgram(),
   new: newProgram(),
   errors: [],
   messages: [],
-  creator: newUser()
+  creator: newUser(),
+  routines: [newRoutine()],
+  routinesMeta: {}
 }
 
 const mutations = {
@@ -39,14 +43,8 @@ const mutations = {
   receiveDetail(state, object) {
     state.detail = object
   },
-  receiveDetailExerciseMeta(state, obj) {
-    state.detailExerciseMeta = obj
-  },
-  receiveDetailExerciseList(state, objects) {
-    state.detailExerciseList = objects
-  },
-  receiveEdit(state, objects) {
-    state.edit = object
+  receiveEdit(state, payload) {
+    state.edit = payload
   },
   receiveNew(state, obj) {
     state.new = obj
@@ -65,6 +63,14 @@ const mutations = {
   },
   receiveCreator(state, payload) {
     state.creator = payload.user
+  },
+  receiveRoutines(state, payload) {
+    state.routines = payload.results
+    state.routinesMeta = {
+      count: payload.count,
+      next: payload.next,
+      previous: payload.previous
+    }
   }
 }
 
@@ -81,15 +87,6 @@ const actions = {
   getDetail({commit}, id) {
     api.get(programEndpoints.detail(id)).then(resp => {
       commit('receiveDetail', resp.data)
-    }).catch(err => {
-      console.log(err)
-      commit('receiveError', err.message)
-    })
-  },
-  getDetailExerciseList({commit}, id) {
-    api.get(exerciseEndpoints.list, {params: {programs: id}}).then(resp => {
-      commit('receiveDetailExerciseMeta', resp.data)
-      commit('receiveDetailExerciseList', resp.data.results)
     }).catch(err => {
       console.log(err)
       commit('receiveError', err.message)
@@ -128,6 +125,14 @@ const actions = {
       console.log(err)
       commit('receiveError', err.message)
     })
+  },
+  getRoutines({commit}, {id, params}) {
+    let reqParams = Object.assign({}, params, {
+      'program': id
+    })
+    api.get(routineEndpoints.list, {params: reqParams}).then(resp => {
+      commit('receiveRoutines', resp.data)
+    })
   }
 }
 
@@ -135,13 +140,13 @@ const getters = {
   meta: state => state.meta,
   list: state => state.list,
   detail: state => state.detail,
-  detailExerciseMeta: state => state.detailExerciseMeta,
-  detailExerciseList: state => state.detailExerciseList,
   edit: state => state.edit,
   new: state => state.new,
   errors: state => state.errors,
   messages: state => state.messages,
-  creator: state => state.creator
+  creator: state => state.creator,
+  routines: state => state.routines,
+  routinesMeta: state => state.routinesMeta
 }
 
 const programs = {
